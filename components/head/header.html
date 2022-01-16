@@ -1,0 +1,166 @@
+<div class="logo">
+    <img src="//img10.360buyimg.com/img/jfs/t1/137458/22/20884/367319/61d7e10cE227befe9/7472fc868c0088dc.gif">
+</div>
+
+<div class="search">
+    <!-- 表单部分 -->
+    <div class="form" id="searchForm">
+        <input type="text" id="searchInput" placeholder="外置光驱">
+        <a href="#" class="iconfont icon-xiangji"></a>
+        <button class="iconfont icon-jing"></button>
+
+        <!-- 联想内容 -->
+        <ul class="list" id="searchList">
+            <li>
+                <span>上衣</span>
+                <span>约34523个商品</span>
+            </li>
+            <li>
+                <span>上衣</span>
+                <span>约34523个商品</span>
+            </li>
+            <li>
+                <span>上衣</span>
+                <span>约34523个商品</span>
+            </li>
+            <li>
+                <span>上衣</span>
+                <span>约34523个商品</span>
+            </li>
+        </ul>
+    </div>
+    <!-- 购物车 -->
+    <div class="cart">
+        <i class="iconfont icon-gouwuche"></i>
+        <a href="#">我的购物车</a>
+        <i class="amount">1</i>
+    </div>
+</div>
+
+<!-- 热门词汇 -->
+<div class="hotWords">
+    <a href="#">我的</a>
+    <a href="#">我的</a><a href="#">我的</a>
+</div>
+
+<!-- 导航栏 -->
+<ul class="nav">
+    <li><a href="#">秒杀</a></li>
+    <li><a href="#">优惠券</a></li>
+    <li><a href="#">PLUS会员</a></li>
+    <li><a href="#">品牌闪购</a></li>
+    <li><a href="#">拍卖</a></li>
+    <li><a href="#">京东家电</a></li>
+    <li><a href="#">京东超市</a></li>
+    <li><a href="#">京东生鲜</a></li>
+    <li><a href="#">京东国际</a></li>
+    <li><a href="#">京东云</a></li>
+</ul>
+
+<!-- 右边广告 -->
+<div class="ad">
+    <a href="#"><img
+            src="http://img10.360buyimg.com/babel/jfs/t1/207195/28/15113/61795/61d6ee9fEc5f137b8/4f99538f1163a5fc.jpg.webp"
+            alt=""></a>
+</div>
+
+<script>
+    (function () {
+        //生成热词的数据 
+        $.ajax({
+            url: '/hotWords',
+            dataType: 'json',
+            success: function (res) {
+                /*
+                    result:[
+                        {
+                            word:'右边',
+                            href:'https://'
+                        },
+                        {
+                            word:'右边',
+                            href:'https://'
+                        },
+                        ....
+                    ] 
+                 */
+                // console.log(res);
+
+                var str = res.result.map(function (item) {
+                    return '<a href="' + item.href + '">' + item.word + '</a>'
+                }).join('');
+                $('.hotWords').html(str);
+
+                //console.log(str);
+            }
+        });
+
+
+        //随机更新第一个热词
+        var recommendTimer = null;
+        function randomWord() {
+            recommendTimer = setInterval(function () {
+                $.ajax({
+                    url: '/recommendWords',
+                    dataType: 'json',
+                    success: function (res) {
+                        // console.log(res);
+                        $('.hotWords a:first-child').text(res.word).attr('href', res.href);
+                    }
+                });
+            }, 2000);
+        }
+        randomWord();
+
+        $('.hotWords').on('mouseenter', 'a:first-child', function () {
+            clearInterval(recommendTimer);
+        }).on('mouseleave', 'a:first-child', function () {
+            randomWord();
+        });
+
+
+        //联想功能
+        var timer = null; //节流用的定时器
+        $('#searchInput').on('input', function () {
+            var val = $(this).val();  //获取用户输入的内容
+
+            if (val) {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    $.ajax({
+                        url: 'https://suggest.taobao.com/sug',
+                        data: {
+                            q: val,
+                            callback: 'searchCb',
+                        },
+                        dataType: 'jsonp'
+                    })
+                }, 500);
+            }
+        });
+
+        //jsonp里面的方法只会去全局取，所以要声明在window身上
+        window.searchCb = function (res) {
+            console.log(res);
+
+            var str = '';
+            res.result.forEach(function (item) {
+                str += '<li><span>' + item[0] + '</span><span>约' + parseInt(item[1]) + '个商品</span></li>';
+            });
+            $('#searchList').html(str).show();
+        };
+
+
+        //鼠标离开
+        var listHideTimer=null;
+        $('#searchForm').mouseleave(function(){
+            clearTimeout(listHideTimer);
+            listHideTimer=setTimeout(function(){
+                $('#searchList').hide();
+            },1000)
+        }).mouseenter(function(){   //离开后又进来了，就把定时器给清除
+            listHideTimer && clearTimeout(listHideTimer);
+        });
+
+    })();
+</script>

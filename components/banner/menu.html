@@ -1,0 +1,95 @@
+<ul class="menuList">
+    <li><a href="#">asdf</a> <span>/</span> <a href="#"></a></li>
+</ul>
+<div class="menuContent">
+    <div class="tabs">
+
+    </div>
+    <div class="details">
+       <!--  <dl>
+            <dt></dt>
+            <dd></dd>
+        </dl> -->
+    </div>
+</div>
+
+<script>
+    (function(){
+        var menuData=[];    //存储所有生成的数据
+
+        $.ajax({
+            url:'/menu',
+            dataType:'json',
+            success:function(res){
+                console.log(res.data);
+                menuData=res.data;
+
+                renderMenuList(res.data);
+            }
+        });
+
+
+        //渲染左边的菜单 
+        function renderMenuList(data){
+            //传过来的data是包含左边与右边的数据
+            var li='';
+            data.forEach(function(item){
+                var a='';
+                item.titles.forEach(function(title){
+                    a+='<a href="'+title.href+'">'+title.name+'</a> <span>/</span> '
+                });
+
+                li+='<li>'+a.substr(0,a.length-15)+'</li>';
+                //console.log(a);
+            });
+
+            $('.menuList').html(li);
+        }
+
+        //添加鼠标hover效果
+        $('.menu').on('mouseenter', 'li', function(){
+            $(this).addClass('active').siblings().removeClass('active');
+
+            var index=$(this).index();
+
+            renderMenuContent(menuData[index].content); //通过li的索引值找到右边对应的数据
+        });
+
+        //渲染右边的列表 
+        function renderMenuContent(data){
+            console.log(data);
+
+            var tabs=data.tabs;
+            var details=data.details;
+
+            //上面tab的结构
+            var tabA='';
+            tabs.forEach(function(tab){
+                tabA+=`<a href="${tab.href}">${tab.name}<i class="iconfont icon-you"></i></a>`;
+            });
+            $('.menuContent .tabs').html(tabA);
+
+            //下面详情的结构
+            console.log(details[0]);
+            var dl='';
+            details.forEach(function(detail){
+                var dt=`<dt><a href="${detail.category.href}">${detail.category.name}<i class="iconfont icon-you"></i></a></dt>`;
+
+                var a='';
+                detail.items.forEach(function(item){
+                    a+=`<a href="${item.href}">${item.name}</a>`;
+                });
+                var dd=`<dd>${a}</dd>`;
+                dl+=`<dl>${dt+dd}</dl>`;
+
+                $('.menuContent .details').html(dl);
+                $('.menuContent').show();
+            })
+        }
+
+        $('.menu').mouseleave(function(){
+            $('.menuContent').hide();
+            $('.active').removeClass('active')
+        })
+    })();
+</script>

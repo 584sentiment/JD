@@ -1,0 +1,68 @@
+<div class="cutdown">
+    <a href="#">
+        <h3>京东秒杀</h3>
+        <p class="notice"><strong>22:00</strong> 点场 倒计时</p>
+        <div>
+            <span class="hour">48</span>
+            <span class="minute">25</span>
+            <span class="second">31</span>
+        </div>
+    </a>
+</div>
+
+<div class="seckillList"></div>
+<div class="seckillBrand"></div>
+
+<script>
+    (() => {
+        var lastTime = new Date("2022-1-16 23:59");
+        var timer = setInterval(function () {
+            var nowTime = new Date();
+            var disTime = lastTime.getTime() - nowTime.getTime();
+            if (disTime <= 0) {
+                // $('#seckill .cutdown a').css({
+                //     'background':'#999',
+                //     'background-image':'http://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/img/4a15d8883775742e3efbb850ae14def7.png',
+                // });
+                // $('#seckill .cutdown .notice').html('<strong>22:00</strong> 点场 已结束');
+                // $('.hour').text('00');
+                // $('.minute').text('00');
+                // $('.second').text('00');
+                clearInterval(timer);
+            } else {
+                var hour = parseInt(disTime / 1000 / 60 / 60);
+                var minutes = parseInt(disTime / 1000 / 60 % 60);
+                var seconds = parseInt(disTime / 1000 % 60);
+                if(hour<10){
+                    hour="0"+hour;
+                }
+                if(minutes<10){
+                    minutes="0"+minutes;
+                }
+                if(seconds<10){
+                    seconds="0"+seconds;
+                }
+                $('#seckill .cutdown .hour').text(hour);
+                $('.minute').text(minutes);
+                $('#seckill .cutdown .second').text(seconds);
+            }
+        },1000)
+
+        $('.seckillList').load('../components/seckill/list.html',function(){
+            $(this).carousel({
+                list:$('.listItem'),
+                navShow:false,
+                duration:10000
+            })
+        })
+        $('.seckillBrand').load('../components/seckill/brand.html',function(){
+            $(this).carousel({
+                list:$('.brandItem'),
+                changeBtn:'hide',
+                navColor:'#999',
+                duration:2000
+            })
+        })
+
+    })()
+</script>

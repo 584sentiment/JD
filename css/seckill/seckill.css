@@ -1,0 +1,143 @@
+#seckill{
+    display: flex;
+    margin-top: 30px;
+}
+
+#seckill .cutdown {
+    width: 190px;
+    height: 260px;
+}
+#seckill .cutdown a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: #e83632 url(http://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/img/4a15d8883775742e3efbb850ae14def7.png) center no-repeat;
+}
+#seckill .cutdown h3 {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 31px;
+}
+#seckill .cutdown p {
+    margin-top: 90px;
+    font-size: 14px;
+    text-align: center;
+}
+#seckill .cutdown div {
+    width: 130px;
+    height: 30px;
+    margin: 10px auto 0;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: space-between;
+}
+#seckill .cutdown div span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: #2f3430;
+    font-size: 20px;
+}
+#seckill .cutdown .hour::after, #seckill .cutdown .minute::after {
+    content: ":";
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    right: -20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* seckillList */
+#seckill .seckillList {
+    width: 800px;
+    background: #Fff;
+}
+#seckill .listItem{
+    display: flex;
+    /* height: 260px; */
+}
+#seckill .listItem div{
+    width: 200px;
+    display: flex;
+    flex-direction: column; /* 竖着排 */
+    align-items: center;
+}
+#seckill .listItem .img{
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#seckill .listItem img{
+    width: 140px;
+    height: 140px;
+}
+#seckill .listItem h4{
+    width: 160px;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#seckill .listItem h4 a{
+    line-height: 26px;
+}
+#seckill .listItem .price{
+    width: 160px;
+    margin-top: 7px;
+    line-height: 24px;
+    text-align: center;
+    color: #e1251b;
+    font-weight: bold;
+}
+
+
+/* seckillBrand */
+#seckill .seckillBrand {
+    width: 200px;
+    height: 260px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #fff;
+}
+#seckill .seckillBrand li a{
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(rgba(255, 255, 255, .5) 55%, rgba(220, 224, 236, .5));
+    font-size: 14px;
+}
+#seckill .seckillBrand li img{
+    width: 120px;
+    height: 120px;
+    margin: 10px 0;
+}
+#seckill .seckillBrand li strong{
+    color: #333;
+}
+#seckill .seckillBrand li button{
+    width: 82px;
+    height: 24px;
+    color: #e1251b;
+    border-radius: 14px;
+    text-align: center;
+    line-height: 22px;
+    font-weight: bold;
+    border: 1px solid #e1251b;
+    margin-top: 4px;
+    transition: background-color .2s ease;
+}
+#seckill .seckillBrand li i{
+    font-size: 12px;
+}
+#seckill .seckillBrand li button:hover{
+    color: #fff;
+    border-color: transparent;
+    background-color: #c81623;
+}

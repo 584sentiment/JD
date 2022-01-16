@@ -1,0 +1,148 @@
+/* banner */
+.bg{
+    width: 100%;
+    height: 710px;
+    background: url(https://img10.360buyimg.com/babel/jfs/t1/141790/26/25746/94755/61d9a805Ea5a237e8/9ec5fc26477289f3.png.webp) center no-repeat;
+    position: absolute;
+    left: 0;
+}
+#bannerWrap{
+    height: 470px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#bannerWrap .menu{
+    width: 190px;
+    background: #fff;
+    position: relative;
+}
+#bannerWrap .banner{
+    width: 590px;
+    background: #ddd;
+}
+#bannerWrap .carousel{
+    width: 190px;
+    background: #ddd;
+}
+#bannerWrap .userWrap{
+    width: 190px;
+    background: #fff;
+    /*position: relative;  要把背景图给盖上 */
+    z-index: 2;
+}
+
+#bannerWrap .menuList{
+    padding: 10px 0;
+}
+#bannerWrap .menuList li {
+    height: 25px;
+    line-height: 25px;
+    padding-left: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+}
+#bannerWrap .menuList li.active{
+    background: #d9d9d9;
+}
+#bannerWrap .menuList a {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+}
+#bannerWrap .menuList a:hover{
+    color: #c81623;
+}
+#bannerWrap .menuList span {
+    padding: 0 2px;
+    font-size: 12px;
+    color: #666;
+}
+
+#bannerWrap .menuContent{
+    position: absolute;
+    padding: 20px 0 10px;
+    box-sizing: border-box;
+    left: 190px;
+    top: 0;
+    z-index: 100;
+    width: 998px;
+    min-height: 470px;
+    border: 1px solid #f7f7f7;
+    background: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, .3);
+
+    display: none;
+}
+#bannerWrap .menuContent .tabs {
+    padding-left: 20px;
+    height: 24px;
+}
+#bannerWrap .menuContent .tabs a {
+    margin-right: 10px;
+    padding: 0 10px;
+    height: 24px;
+    display: inline-block;
+    background: #333;
+    line-height: 24px;
+    color: #fff;
+    font-size: 12px;
+}
+#bannerWrap .menuContent .tabs a:hover{
+    background: #c81623;
+    color: #fff;
+}
+#bannerWrap .menuContent .tabs a i{
+    font-size: 14px;    /* 无用 */
+    margin-left: 5px;
+}
+#bannerWrap .details {
+    /* 下面的 detail 各个分类 */
+    padding: 10px 0 0 20px;
+}
+#bannerWrap .details dl {
+    /* 下面的 detail 各个分类 */
+    padding: 3px 0;
+
+    display: flex;
+}
+
+
+#bannerWrap .details dt {
+    /* 下面的 detail 各个分类 */
+    /* width: 80px; */
+    text-align: right;
+}
+#bannerWrap .details a{
+    color: #666;
+}
+#bannerWrap .details a:hover{
+    color: #c81623;
+}
+
+#bannerWrap .menuContent .details dt a {
+    /* 下面的 detail 各个分类 */
+    height: 16px;
+    line-height: 16px;
+    margin: 3px 0;
+    padding: 0 7px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#bannerWrap .menuContent .details dt i {
+    /* 下面的 detail 各个分类 */
+    float: right;
+    margin-left: 5px;
+}
+
+#bannerWrap .menuContent .details dd a {
+    /* 下面的 detail 各个分类 */
+    height: 16px;
+    line-height: 16px;
+    display: inline-block;
+    margin: 3px 0;
+    padding: 0 7px;
+    white-space: nowrap;
+}
